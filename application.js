@@ -4,9 +4,10 @@ canvas.width = window.innerWidth - 20;
 canvas.height = window.innerHeight -20;
 
 // this is our ball
-var pos = {x: 10, y: 10, vx: 10, vy: 10, sx: 10, sy: 10};
-var pad = {x: canvas.width / 2, y: (canvas.height / 2) , sx: 20, sy: 80};
+var pos = {x: 10, y: 10, vx: 10, vy: 10, sx: 10, sy:10};
+var pad = {x: canvas.width * 0.85, y: (canvas.height / 4.5) , sx: 20, sy:canvas.height / 5};
 var interval;
+var dist = canvas.height / 5;
 
 
 
@@ -25,7 +26,8 @@ function loop(){
         if(pos.x < (pad.x + pad.sx) && pos.y < (pad.y + pad.sy)) {
             pos.vx = pos.vx * -1;
             
-        }
+            
+        } 
         
     }
     
@@ -43,5 +45,21 @@ function loop(){
         drawing.fillRect(pos.x, pos.y, pos.sx, pos.sy);
     
 } 
+document.onkeydown = function(e){
+        if(e.keyCode == 38){
+            if(pad.y <= 0) {
+            return false;
+            }
+            pad.y = pad.y - dist;
+            return false;
+        }  else if (e.keyCode == 40){
+            if((pad.y + pad.sy) >=canvas.height) {
+            return false;
+            }
+            pad.y = pad.y + dist;
+            return false;
+        }
+}
 
-interval = setInterval(loop, 10);
+interval = setInterval(loop, 5);
+ 
